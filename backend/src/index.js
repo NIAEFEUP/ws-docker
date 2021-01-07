@@ -1,6 +1,7 @@
 const { APP_PORT, DATA_FILE } = process.env;
 
 const FileSystemItemGateway = require("./fs-gateway");
+const fs = require("fs");
 const filepath = DATA_FILE || "data.json";
 fs.closeSync(fs.openSync(filepath, "a"));
 const gateway = new FileSystemItemGateway(filepath);
