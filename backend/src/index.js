@@ -1,5 +1,6 @@
 const { APP_PORT, DATA_FILE } = process.env;
-
+const DEFAULT_APP_PORT = 5555;
+const fs = require("fs");
 const FileSystemItemGateway = require("./fs-gateway");
 const fs = require("fs");
 const filepath = DATA_FILE || "data.json";
@@ -13,8 +14,12 @@ const RestShoppingListInteractor = require("./rest-interactor");
 const interactor = new RestShoppingListInteractor(list);
 
 const express = require("express");
+const cors = require("cors");
+
 const app = express();
+app.use(cors());
 app.use(express.json());
+app.options("*", cors());
 
 app.get("/", (_req, res) => {
   console.log("GET /");
@@ -56,5 +61,5 @@ app.delete("/:name", (req, res) => {
   res.sendStatus(status);
 });
 
-const port = parseInt(APP_PORT) || 3000;
+const port = parseInt(APP_PORT) || DEFAULT_APP_PORT;
 app.listen(port, () => console.log(`Starting API server on port ${port}`));
