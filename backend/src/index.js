@@ -2,9 +2,16 @@ const { APP_PORT, DATA_FILE } = process.env;
 const DEFAULT_APP_PORT = 5555;
 const fs = require("fs");
 const FileSystemItemGateway = require("./fs-gateway");
-const fs = require("fs");
+
 const filepath = DATA_FILE || "data.json";
-fs.closeSync(fs.openSync(filepath, "a"));
+
+// if database does not exists, initialize it
+const data = fs.openSync(filepath, "a");
+if (fs.readFileSync(data, "utf-8") == "") {
+  fs.writeFileSync(data, "{}");
+}
+fs.closeSync(data);
+
 const gateway = new FileSystemItemGateway(filepath);
 
 const { ShoppingList } = require("./model");
