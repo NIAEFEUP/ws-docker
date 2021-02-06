@@ -3,14 +3,12 @@ const DEFAULT_APP_PORT = 5555;
 const fs = require("fs");
 const FileSystemItemGateway = require("./fs-gateway");
 
-const filepath = DATA_FILE || "data.json";
+const filepath = DATA_FILE || "./data.json";
 
 // if database does not exists, initialize it
-const data = fs.openSync(filepath, "a");
-if (fs.readFileSync(data, "utf-8") == "") {
-  fs.writeFileSync(data, "{}");
+if (fs.readFileSync(filepath, "utf-8") == "") {
+  fs.writeFileSync(filepath, "{}");
 }
-fs.closeSync(data);
 
 const gateway = new FileSystemItemGateway(filepath);
 

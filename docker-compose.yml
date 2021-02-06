@@ -10,9 +10,8 @@ services:
       - APP_PORT=4567
     ports:
       - "4567:4567"
+
   frontend:
     build: ./frontend
-    depends_on:
-      - backend
     ports:
       - "5000:80"
