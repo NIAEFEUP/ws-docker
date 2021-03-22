@@ -6,7 +6,11 @@ const FileSystemItemGateway = require("./fs-gateway");
 const filepath = DATA_FILE || "./data.json";
 
 // if database does not exists, initialize it
-if (fs.readFileSync(filepath, "utf-8") == "") {
+try {
+  if (fs.readFileSync(filepath, "utf-8") == "") {
+    fs.writeFileSync(filepath, "{}");
+  }
+} catch (e) {
   fs.writeFileSync(filepath, "{}");
 }
 
