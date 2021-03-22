@@ -6,9 +6,12 @@ export default async function handler(req, res) {
   const method = req.method;
   const response = await fetch(`${process.env.API_URL}/${path.join("/")}`, {
     method,
-    body: method != "GET" ? JSON.stringify(body) : undefined,
+    body:
+      method != "GET" && method != "DELETE" ? JSON.stringify(body) : undefined,
     headers:
-      method != "GET" ? { "Content-Type": "application/json" } : undefined,
+      method != "GET" && method != "DELETE"
+        ? { "Content-Type": "application/json" }
+        : undefined,
   });
   if (method != "DELETE") {
     const json = await response.json();
