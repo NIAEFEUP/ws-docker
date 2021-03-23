@@ -3,7 +3,7 @@ const DEFAULT_APP_PORT = 5555;
 const fs = require("fs");
 const FileSystemItemGateway = require("./fs-gateway");
 
-const filepath = DATA_FILE || "./data.json";
+const filepath = DATA_FILE || "./data/data.json";
 
 // if database does not exists, initialize it
 try {
