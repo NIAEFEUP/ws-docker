@@ -16,7 +16,7 @@ class FileSystemItemGateway {
 
   saveMap(itemMap) {
     try {
-      fs.writeFileSync(this.path, JSON.stringify(itemMap, undefined, 2));
+      fs.writeFileSync(this.path, JSON.stringify(itemMap, undefined, 2) + "\n");
       return true;
     } catch (e) {
       console.error(e);

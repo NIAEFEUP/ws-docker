@@ -3,6 +3,10 @@ FROM node:14.15.4-buster-slim
 
 WORKDIR /usr/src/app
 
+# App specific behavior: create separate directory for our database to use external volumes
+RUN mkdir data
+ENV DATA_FILE="/usr/src/app/data/db.json"
+
 # We will now install the dependencies. Because they change less often than the
 # code, this will allow the container build system to cache the dependencies
 # between builds
